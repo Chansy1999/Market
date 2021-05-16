@@ -1,0 +1,89 @@
+class Product {
+  final String name;
+  final int price;
+  final String image;
+
+  Product(
+    this.name,
+    this.price,
+    this.image,
+  );
+}
+
+List<Product> product = [
+  Product(
+    "Avocado",
+    20000,
+    "assets/images/avocado.png",
+  ),
+  Product(
+    "Banana",
+    5000,
+    "assets/images/banana.png",
+  ),
+  Product(
+    "Broccoli",
+    20000,
+    "assets/images/broccoli.png",
+  ),
+  Product(
+    "Cabbage",
+    5000,
+    "assets/images/cabbage.png",
+  ),
+  Product(
+    "Coriander",
+    5000,
+    "assets/images/coriander.png",
+  ),
+  Product(
+    "Corn",
+    10000,
+    "assets/images/corn.png",
+  ),
+  Product(
+    "Ginger",
+    20000,
+    "assets/images/ginger.png",
+  ),
+  Product(
+    "Lemon",
+    5000,
+    "assets/images/lemon.png",
+  ),
+  Product(
+    "Lettuce",
+    20000,
+    "assets/images/lettuce.png",
+  ),
+  Product(
+    "Mago",
+    15000,
+    "assets/images/mango.png",
+  ),
+  Product(
+    "Onion",
+    5000,
+    "assets/images/onion.png",
+  ),
+  Product(
+    "Orange",
+    15000,
+    "assets/images/orange.png",
+  ),
+  Product(
+    "Pupkin",
+    10000,
+    "assets/images/pumpkin.png",
+  ),
+  Product(
+    "Tomato",
+    5000,
+    "assets/images/tomato.png",
+  ),
+  Product(
+    "Water Melon",
+    10000,
+    "assets/images/watermelon.png",
+  ),
+];
