@@ -1,89 +1,53 @@
+import 'dart:convert';
+
+Product productFromJson(String str) => Product.fromJson(json.decode(str));
+
+String productToJson(Product data) => json.encode(data.toJson());
+
 class Product {
-  final String name;
-  final int price;
-  final String image;
+  Product({
+    required this.id,
+    required this.image,
+    required this.title,
+    required this.price,
+    required this.description,
+    required this.vouchers,
+    required this.delivery,
+    required this.deliveryPrice,
+    required this.postDate,
+  });
 
-  Product(
-    this.name,
-    this.price,
-    this.image,
-  );
+  String id;
+  String image;
+  String title;
+  int price;
+  String description;
+  String vouchers;
+  String delivery;
+  int deliveryPrice;
+  DateTime postDate;
+
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+        id: json["_id"],
+        image: json["image"],
+        title: json["title"],
+        price: json["price"],
+        description: json["description"],
+        vouchers: json["vouchers"],
+        delivery: json["delivery"],
+        deliveryPrice: json["deliveryPrice"],
+        postDate: DateTime.parse(json["postDate"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "image": image,
+        "title": title,
+        "price": price,
+        "description": description,
+        "vouchers": vouchers,
+        "delivery": delivery,
+        "deliveryPrice": deliveryPrice,
+        "postDate": postDate.toIso8601String(),
+      };
 }
-
-List<Product> product = [
-  Product(
-    "Avocado",
-    20000,
-    "assets/images/avocado.png",
-  ),
-  Product(
-    "Banana",
-    5000,
-    "assets/images/banana.png",
-  ),
-  Product(
-    "Broccoli",
-    20000,
-    "assets/images/broccoli.png",
-  ),
-  Product(
-    "Cabbage",
-    5000,
-    "assets/images/cabbage.png",
-  ),
-  Product(
-    "Coriander",
-    5000,
-    "assets/images/coriander.png",
-  ),
-  Product(
-    "Corn",
-    10000,
-    "assets/images/corn.png",
-  ),
-  Product(
-    "Ginger",
-    20000,
-    "assets/images/ginger.png",
-  ),
-  Product(
-    "Lemon",
-    5000,
-    "assets/images/lemon.png",
-  ),
-  Product(
-    "Lettuce",
-    20000,
-    "assets/images/lettuce.png",
-  ),
-  Product(
-    "Mago",
-    15000,
-    "assets/images/mango.png",
-  ),
-  Product(
-    "Onion",
-    5000,
-    "assets/images/onion.png",
-  ),
-  Product(
-    "Orange",
-    15000,
-    "assets/images/orange.png",
-  ),
-  Product(
-    "Pupkin",
-    10000,
-    "assets/images/pumpkin.png",
-  ),
-  Product(
-    "Tomato",
-    5000,
-    "assets/images/tomato.png",
-  ),
-  Product(
-    "Water Melon",
-    10000,
-    "assets/images/watermelon.png",
-  ),
-];
