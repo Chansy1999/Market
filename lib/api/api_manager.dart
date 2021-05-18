@@ -1,27 +1,25 @@
 import 'dart:convert';
 
-import 'package:market/model/product.dart';
 import 'package:http/http.dart' as http;
+import 'package:market/model/product.dart';
 
-class API_Manager {
-  Future<Product> getProducts() async {
-    var client = http.Client();
-    var productModel = null;
-
-    try {
-      var respone = await client.get(
-        Uri.http("https://the-closet-api.herokuapp.com", "products"),
-      );
-      if (respone.statusCode == 200) {
-        var jsonString = respone.body;
-        var jsonMap = json.decode(jsonString);
-
-        productModel = Product.fromJson(jsonMap);
-      }
-    } catch (ex) {
-      return productModel;
+class Api_Manager {
+  var client = http.Client();
+  Future<List<Product>> getProduct() async {
+    var respone = await client.get(
+      Uri.https("the-closet-api.herokuapp.com", "products"),
+    );
+    if (respone.statusCode == 200) {
+      List<dynamic> body = jsonDecode(respone.body);
+      List<Product> products = body
+          .map(
+            (dynamic item) => Product.fromJson(item),
+          )
+          .toList();
+      print(products);
+      return products;
+    } else {
+      throw "Something went wrong";
     }
-
-    return productModel;
   }
 }
