@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
   Api_Manager api_manager = Api_Manager();
   void initState() {
     super.initState();
-    // api_manager.getProduct();
+    api_manager.getProduct();
   }
 
   @override
@@ -27,20 +27,34 @@ class _HomePageState extends State<HomePage> {
             builder: (context, AsyncSnapshot<List<Product>> snapshot) {
               if (snapshot.hasData) {
                 List<Product>? products = snapshot.data;
-                return StaggeredGridView.countBuilder(
-                  physics: BouncingScrollPhysics(),
-                  crossAxisCount: 4,
-                  itemCount: products!.length,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
-                  itemBuilder: (context, index) => ProductCard(
-                    image: products[index].image,
-                    name: products[index].title,
-                    price: products[index].price,
-                    delivery: products[index].delivery,
-                    deliveryPrice: products[index].deliveryPrice,
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    await Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (a, b, c) => HomePage(),
+                        transitionDuration: Duration(seconds: 100),
+                      ),
+                    );
+                  },
+                  color: Colors.cyan,
+                  backgroundColor: Colors.white,
+                  strokeWidth: 2,
+                  child: StaggeredGridView.countBuilder(
+                    physics: BouncingScrollPhysics(),
+                    crossAxisCount: 4,
+                    itemCount: products!.length,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                    itemBuilder: (context, index) => ProductCard(
+                      image: products[index].image,
+                      name: products[index].title,
+                      price: products[index].price,
+                      delivery: products[index].delivery,
+                      deliveryPrice: products[index].deliveryPrice,
+                    ),
+                    staggeredTileBuilder: (index) => StaggeredTile.fit(2),
                   ),
-                  staggeredTileBuilder: (index) => StaggeredTile.fit(2),
                 );
               } else {
                 return StaggeredGridView.countBuilder(
@@ -51,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSpacing: 8,
                   itemBuilder: (context, index) => WaittingCard(),
                   staggeredTileBuilder: (index) =>
-                      StaggeredTile.count(2, index.isEven ? 2 : 4),
+                      StaggeredTile.count(2, index.isEven ? 3 : 4),
                 );
               }
             },
